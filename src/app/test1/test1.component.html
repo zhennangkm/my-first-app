@@ -1,0 +1,31 @@
+<span [ngStyle]="{ backgroundColor: getColor() }"
+  >组件外部引入 template 和 css</span
+>
+<div [ngClass]="{ 'dynamic-class': !allowCreate }">
+  插值表达式：{{ tempNum }}_{{ tempStr }} {{ tempFunc() }}
+</div>
+<button class="btn btn-primary" [disabled]="allowCreate" (click)="onCreate()">
+  测试按钮
+</button>
+
+<input
+  *ngIf="allowCreate; else myElse"
+  type="text"
+  class="form-control"
+  (input)="onUpdate($event)"
+/>
+<ng-template #myElse>
+  <input type="text" class="form-control" [(ngModel)]="tempStr" />
+</ng-template>
+
+<!-- @if (allowCreate) {
+  <input type="text" class="form-control" (input)="onUpdate($event)">
+} @else {
+  <input type="text" class="form-control" [(ngModel)]="tempStr">
+} -->
+
+<div *ngFor="let item of tempArr; let i = index">{{ item }}</div>
+
+<!-- @for(item of tempArr;track item) {
+<div>{{ item }}</div>
+} -->
